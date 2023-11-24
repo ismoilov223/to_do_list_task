@@ -4,7 +4,7 @@ import TodoBox from "./components/TodoBox";
 
 function App() {
   return <>
-  <div className="container w-full max-[1500px]:">
+  <div className="container w-full max-[1500px]">
   <HeroBg></HeroBg>
   <TodoBox></TodoBox>
   </div>
