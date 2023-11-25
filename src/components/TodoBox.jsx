@@ -1,10 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import TodosRow from "./component/TodosRow";
 const TodoBox = () => {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
+  // const [tasks, setTasks] = useState([]);
+  // const savedTasks = localStorage.getItem("tasks");
+  // const tasks = savedTasks ? JSON.parse(savedTasks) : [];
+  const [tasks, setTasks] = useState(() => {
+    // Brauzer ichidagi localStorage'dan tasks ma'lumotlarini yuklab olish
+    const savedTasks = localStorage.getItem("tasks");
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+  // tasks data
+  // localStorage.setItem('tasks', JSON.stringify({tasks:"salom"}));
 
+  // Yuklash
+
+  const [newTask, setNewTask] = useState("");
+  console.log(tasks);
   const handleInputChange = (event) => {
     if (event.key === "Enter" || event.key === "enter") {
       addTask();
@@ -12,16 +27,15 @@ const TodoBox = () => {
     }
   };
 
-  console.log(tasks);
   const addTask = () => {
-    if (newTask.trim() !== "") {
-      setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
-      setNewTask("");
-    }
+    setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
+    setNewTask("");
   };
 
   const toggleTask = (taskId) => {
-    // console.log("toggle is working!");
+    console.log("toggle is working!");
+    console.log(tasks);
+
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -29,7 +43,8 @@ const TodoBox = () => {
     );
   };
   const completed = () => {
-    // console.log("toggle is working!");
+    console.log("toggle is working!");
+
     setTasks(tasks.map((task) => (true ? { ...task, completed: true } : task)));
   };
 
