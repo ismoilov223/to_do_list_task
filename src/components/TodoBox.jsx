@@ -4,6 +4,7 @@ import TodosRow from "./component/TodosRow";
 const TodoBox = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+
   const handleInputChange = (event) => {
     if (event.key === "Enter" || event.key === "enter") {
       addTask();
@@ -11,6 +12,7 @@ const TodoBox = () => {
     }
   };
 
+  console.log(tasks);
   const addTask = () => {
     if (newTask.trim() !== "") {
       setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
@@ -19,11 +21,16 @@ const TodoBox = () => {
   };
 
   const toggleTask = (taskId) => {
+    console.log("toggle is working!");
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, completed: !task.completed } : task
       )
     );
+  };
+  const completed = () => {
+    console.log("toggle is working!");
+    setTasks(tasks.map((task) => (true ? { ...task, completed: true } : task)));
   };
 
   const removeTask = (taskId) => {
@@ -46,15 +53,17 @@ const TodoBox = () => {
           />
         </div>
         <div className="todos-box mb-[3%] w-[80%] md:w-[43%] bg-white rounded-[15px]">
-          {tasks.map((task) => (
-            <TodosRow
-              key={task.id}
-              complete={task.completed}
-              task={task}
-              toggleTask={toggleTask}
-              removeTask={removeTask}
-            ></TodosRow>
-          ))}
+          <div className="scrollbox">
+            {tasks.map((task) => (
+              <TodosRow
+                key={task.id}
+                completed={completed}
+                task={task}
+                toggleTask={toggleTask}
+                removeTask={removeTask}
+              ></TodosRow>
+            ))}
+          </div>
 
           <div className="todo-bottom-box flex items-center justify-center px-8 py-4">
             <div className="text-box flex items-center gap-[19px]">
@@ -64,7 +73,10 @@ const TodoBox = () => {
               <button className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors">
                 Active
               </button>
-              <button className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors">
+              <button
+                className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors"
+                onClick={() => completed()}
+              >
                 Completed
               </button>
             </div>

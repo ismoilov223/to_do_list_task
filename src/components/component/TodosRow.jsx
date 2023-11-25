@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
 import { Checkbox } from "@material-tailwind/react";
 
-const TodosRow = ({complete,task,toggleTask,removeTask}) => {
+const TodosRow = ({ completed, task, toggleTask, removeTask }) => {
+  console.log(task.completed);
   return (
     <>
       {" "}
       <div className="row-box bg-transparent flex items-center justify-between px-5 border-b border-[#E3E4F1] gap-3">
         <div className="firs-cont-of-todos flex items-center gap-2 ">
           <div className="checkbox-box">
-            <Checkbox className="rounded-[50%]" color="purple" defaultCheck />
+            <Checkbox
+              className="rounded-[50%]"
+              color="purple"
+              onChange={() => toggleTask(task.id)}
+              checked={task.completed}
+            />
           </div>
           <div className="todo-text-box">
-            <p className="text-[#494C6B] text-xs md:text-lg font-normal ">
-             {task.text}
+            <p
+              className={
+                `text-xs md:text-lg font-normal` + task.completed
+                  ? `text-[#D1D2DA]`
+                  : `text-[#494C6B]`
+              }
+            >
+              {task.text}
             </p>
           </div>
         </div>
