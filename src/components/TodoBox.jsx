@@ -20,8 +20,11 @@ const TodoBox = () => {
   };
 
   const addTask = () => {
-    setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
-    setNewTask("");
+    if (newTask !== "") {
+      setTasks([...tasks, { id: Date.now(), text: newTask, completed: false }]);
+      setNewTask("");
+    }
+    console.log(newTask == ""?"null":"not null");
   };
 
   const toggleTask = (taskId) => {
@@ -66,7 +69,7 @@ const TodoBox = () => {
             data-ripple-dark="true"
             onClick={() => addTask()}
           >
-            <IoSaveOutline />
+            <IoSaveOutline className="text-xl" />
           </button>
         </div>
         <div className="todos-box mb-[3%] w-[80%] md:w-[43%] bg-white rounded-[15px]">
