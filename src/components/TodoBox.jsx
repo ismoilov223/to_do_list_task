@@ -21,7 +21,7 @@ const TodoBox = () => {
   };
 
   const toggleTask = (taskId) => {
-    console.log("toggle is working!");
+    // console.log("toggle is working!");
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -29,12 +29,15 @@ const TodoBox = () => {
     );
   };
   const completed = () => {
-    console.log("toggle is working!");
+    // console.log("toggle is working!");
     setTasks(tasks.map((task) => (true ? { ...task, completed: true } : task)));
   };
 
   const removeTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+  const removecompleted = (taskId) => {
+    setTasks(tasks.filter((task) => task.completed !== true));
   };
   return (
     <>
@@ -65,14 +68,8 @@ const TodoBox = () => {
             ))}
           </div>
 
-          <div className="todo-bottom-box flex items-center justify-center px-8 py-4">
+          <div className="todo-bottom-box flex items-center justify-between px-8 py-4">
             <div className="text-box flex items-center gap-[19px]">
-              <button className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors">
-                All
-              </button>
-              <button className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors">
-                Active
-              </button>
               <button
                 className="first-text text-[#3A7CFD] text-sm font-bold hover:text-[#494C6B] transition-colors"
                 onClick={() => completed()}
@@ -80,6 +77,12 @@ const TodoBox = () => {
                 Completed
               </button>
             </div>
+            <button
+              className="first-text text-[#9495A5] text-sm font-normal hover:text-[#494C6B] transition-colors"
+              onClick={() => removecompleted()}
+            >
+              Clear Completed
+            </button>
           </div>
         </div>
       </div>

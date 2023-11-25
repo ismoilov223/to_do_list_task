@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
 import { Checkbox } from "@material-tailwind/react";
 
 const TodosRow = ({ completed, task, toggleTask, removeTask }) => {
-  console.log(task.completed);
+  // console.log(task.completed);
+
   return (
     <>
       {" "}
@@ -19,13 +20,7 @@ const TodosRow = ({ completed, task, toggleTask, removeTask }) => {
             />
           </div>
           <div className="todo-text-box">
-            <p
-              className={
-                `text-xs md:text-lg font-normal` + task.completed
-                  ? `text-[#D1D2DA]`
-                  : `text-[#494C6B]`
-              }
-            >
+            <p className={"todo-text text-xs md:text-lg font-normal"}>
               {task.text}
             </p>
           </div>
