@@ -9,10 +9,7 @@ const TodosRow = ({
   toggleTask,
   removeTask,
   handleTextEdit,
-
 }) => {
-  // console.log(task.completed);
-
   return (
     <>
       {" "}
@@ -30,7 +27,7 @@ const TodosRow = ({
             <input
               className={"todo-text outline-none w-full"}
               value={task.text}
-              onChange={(e) => handleTextEdit(task.id,e.target.value)}
+              onChange={(e) => handleTextEdit(task.id, e.target.value)}
             ></input>
           </div>
         </div>

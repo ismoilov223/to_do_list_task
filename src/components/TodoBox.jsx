@@ -11,7 +11,6 @@ const TodoBox = () => {
   }, [tasks]);
 
   const [newTask, setNewTask] = useState("");
-  console.log(tasks);
   const handleInputChange = (event) => {
     if (event.key === "Enter" || event.key === "enter") {
       addTask();
@@ -25,9 +24,6 @@ const TodoBox = () => {
   };
 
   const toggleTask = (taskId) => {
-    console.log("toggle is working!");
-    console.log(tasks);
-
     setTasks(
       tasks.map((task) =>
         task.id === taskId ? { ...task, completed: !task.completed } : task
@@ -35,19 +31,19 @@ const TodoBox = () => {
     );
   };
   const completed = () => {
-    console.log("toggle is working!");
-
     setTasks(tasks.map((task) => (true ? { ...task, completed: true } : task)));
   };
 
   const removeTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
-  const removecompleted = (taskId) => {
+  const removecompleted = () => {
     setTasks(tasks.filter((task) => task.completed !== true));
   };
-  const handleTextEdit = (id,value) => {
-    setTasks(tasks.map((task) => (task.id == id ? { ...task, text: value } : task)));
+  const handleTextEdit = (id, value) => {
+    setTasks(
+      tasks.map((task) => (task.id == id ? { ...task, text: value } : task))
+    );
   };
   return (
     <>
