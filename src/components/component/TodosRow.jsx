@@ -3,13 +3,20 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
 import { Checkbox } from "@material-tailwind/react";
 
-const TodosRow = ({ completed, task, toggleTask, removeTask }) => {
+const TodosRow = ({
+  completed,
+  task,
+  toggleTask,
+  removeTask,
+  handleTextEdit,
+
+}) => {
   // console.log(task.completed);
 
   return (
     <>
       {" "}
-      <div className="row-box bg-transparent flex items-center justify-between px-5 border-b border-[#E3E4F1] gap-3">
+      <div className="row-box bg-transparent flex items-center justify-between md:px-5 border-b border-[#E3E4F1] gap-3">
         <div className="firs-cont-of-todos flex items-center gap-2 ">
           <div className="checkbox-box">
             <Checkbox
@@ -20,9 +27,11 @@ const TodosRow = ({ completed, task, toggleTask, removeTask }) => {
             />
           </div>
           <div className="todo-text-box">
-            <p className={"todo-text text-xs md:text-lg font-normal"}>
-              {task.text}
-            </p>
+            <input
+              className={"todo-text outline-none w-full"}
+              value={task.text}
+              onChange={(e) => handleTextEdit(task.id,e.target.value)}
+            ></input>
           </div>
         </div>
         <div className="crud-icons-box flex items-center gap-2">

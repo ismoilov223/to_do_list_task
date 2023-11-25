@@ -2,21 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import TodosRow from "./component/TodosRow";
 const TodoBox = () => {
-  // const [tasks, setTasks] = useState([]);
-  // const savedTasks = localStorage.getItem("tasks");
-  // const tasks = savedTasks ? JSON.parse(savedTasks) : [];
   const [tasks, setTasks] = useState(() => {
-    // Brauzer ichidagi localStorage'dan tasks ma'lumotlarini yuklab olish
     const savedTasks = localStorage.getItem("tasks");
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-  // tasks data
-  // localStorage.setItem('tasks', JSON.stringify({tasks:"salom"}));
-
-  // Yuklash
 
   const [newTask, setNewTask] = useState("");
   console.log(tasks);
@@ -54,6 +46,9 @@ const TodoBox = () => {
   const removecompleted = (taskId) => {
     setTasks(tasks.filter((task) => task.completed !== true));
   };
+  const handleTextEdit = (id,value) => {
+    setTasks(tasks.map((task) => (task.id == id ? { ...task, text: value } : task)));
+  };
   return (
     <>
       <div className="todo-cont w-full flex flex-col items-center gap-10 absolute z-1 top-12">
@@ -79,6 +74,7 @@ const TodoBox = () => {
                 task={task}
                 toggleTask={toggleTask}
                 removeTask={removeTask}
+                handleTextEdit={handleTextEdit}
               ></TodosRow>
             ))}
           </div>
