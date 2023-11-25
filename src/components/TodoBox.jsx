@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import TodosRow from "./component/TodosRow";
+import { IoCloseOutline, IoSaveOutline } from "react-icons/io5";
 const TodoBox = () => {
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem("tasks");
@@ -51,7 +52,7 @@ const TodoBox = () => {
         <div className="title-box w-full flex justify-center">
           <img src="svg/Logo.svg" alt="" />
         </div>
-        <div className="creator-box w-[80%] md:w-[43%] bg-white py-[18px] pl-5 rounded-[5px]">
+        <div className="creator-box w-[80%] md:w-[43%] bg-white py-[18px] pl-5 rounded-[5px] flex items-center pr-3">
           <input
             type="text"
             placeholder="Create a new todo…"
@@ -60,6 +61,13 @@ const TodoBox = () => {
             onChange={(e) => setNewTask(e.target.value)}
             onKeyDown={handleInputChange}
           />
+          <button
+            class="middle none text-[17px] md:text-[25px] center flex items-center justify-center rounded-lg p-3 font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            data-ripple-dark="true"
+            onClick={() => addTask()}
+          >
+            <IoSaveOutline />
+          </button>
         </div>
         <div className="todos-box mb-[3%] w-[80%] md:w-[43%] bg-white rounded-[15px]">
           <div className="scrollbox">
